@@ -20,5 +20,5 @@ export interface FindInvoiceUseCaseOutputDTO {
     price: number;
   }[];
   total: number;
-  createAt: Date;
+  createdAt: Date;
 }
