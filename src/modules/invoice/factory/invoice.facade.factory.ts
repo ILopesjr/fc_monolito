@@ -9,8 +9,8 @@ export default class InvoiceFacadeFactory {
     const findUseCase = new FindInvoiceUseCase(repository);
     const generateUseCase = new GenerateInvoiceUseCase(repository);
     const facade = new InvoiceFacade({
-      findUseCase: findUseCase,
-      generateUseCase: generateUseCase,
+      findUsecase: findUseCase,
+      generateUsecase: generateUseCase,
     });
 
     return facade;
