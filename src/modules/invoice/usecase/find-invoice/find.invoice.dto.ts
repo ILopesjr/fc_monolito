@@ -9,7 +9,7 @@ export interface FindInvoiceUseCaseOutputDTO {
   address: {
     street: string;
     number: string;
-    complement?: string;
+    complement: string;
     city: string;
     state: string;
     zipCode: string;
@@ -20,5 +20,5 @@ export interface FindInvoiceUseCaseOutputDTO {
     price: number;
   }[];
   total: number;
-  createdAt: Date;
+  createAt: Date;
 }
