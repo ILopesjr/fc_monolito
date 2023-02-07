@@ -3,7 +3,7 @@ import ValueObject from "../../@shared/domain/value-object/value-object.interfac
 type AddressProps = {
   street: string;
   number: string;
-  complement?: string;
+  complement: string;
   city: string;
   state: string;
   zipCode: string;
