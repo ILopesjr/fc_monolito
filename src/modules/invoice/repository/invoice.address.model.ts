@@ -16,7 +16,7 @@ export default class InvoiceAddressModel extends Model {
   @Column({ allowNull: false })
   number: string;
 
-  @Column({ allowNull: true })
+  @Column({ allowNull: false })
   complement: string;
 
   @Column({ allowNull: false })
