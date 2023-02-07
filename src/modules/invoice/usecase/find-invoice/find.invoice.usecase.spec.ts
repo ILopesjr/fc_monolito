@@ -23,7 +23,7 @@ const invoice = new Invoice({
 });
 
 const MockRepository = () => ({
-  genarate: jest.fn(),
+  generate: jest.fn(),
   find: jest.fn().mockReturnValue(Promise.resolve(invoice)),
 });
 
@@ -33,7 +33,7 @@ describe('Find invoice usacase unit test', () => {
     const findInvoiceUseCase = new FindInvoiceUseCase(invoiceRepository);
     const input = {
       id: '1',
-    }
+    };
 
     const result = await findInvoiceUseCase.execute(input);
 
@@ -56,6 +56,5 @@ describe('Find invoice usacase unit test', () => {
     expect(result.items[1].name).toBe(invoice.items[1].name);
     expect(result.items[1].price).toBe(invoice.items[1].price);
     expect(result.total).toBe(30);
-
   });
 });
