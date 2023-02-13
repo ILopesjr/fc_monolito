@@ -1,5 +1,5 @@
 import express from 'express';
-// import { productsRoute } from "./routes/product.route";
+import { productsRoute } from "./routes/product.route";
 // import { clientsRoute } from "./routes/client.route";
 // import { checkoutRoute } from "./routes/checkout.route";
 // import { invoicesRoute } from "./routes/invoice.route";
@@ -16,7 +16,7 @@ app.use(express.json());
 
 let sequelize: Sequelize;
 
-// app.use("/products", productsRoute);
+app.use("/products", productsRoute);
 // app.use("/clients", clientsRoute);
 // app.use("/checkout", checkoutRoute);
 // app.use("/invoice", invoicesRoute);
@@ -29,11 +29,11 @@ async function initDB() {
   });
 
   sequelize.addModels([
-    OrderModel,
-    ClientModel,
-    InvoiceModel,
-    TransactionModel,
-    StoreCatalogProductModel,
+    // OrderModel,
+    // ClientModel,
+    // InvoiceModel,
+    // TransactionModel,
+    // StoreCatalogProductModel,
     ProductModel,
   ]);
 
