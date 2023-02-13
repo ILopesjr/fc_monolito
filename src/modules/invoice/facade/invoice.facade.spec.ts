@@ -53,7 +53,7 @@ describe('InvoiceFacade test', () => {
       ],
     };
 
-    const output = await facade.generate(input);
+    const output = await facade.create(input);
 
     expect(output.id).toBeDefined();
     expect(output.name).toBe(input.name);

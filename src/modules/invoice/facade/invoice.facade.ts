@@ -6,7 +6,7 @@ export interface UseCaseProps {
     findUsecase: UseCaseInterface;
 }
 
-export default class InvoiceFacade implements InvoiceFacadeInterface {
+export default class invoiceFacade implements InvoiceFacadeInterface {
     private _generateUsecase: UseCaseInterface;
     private _findUsecase: UseCaseInterface;
   
@@ -15,7 +15,7 @@ export default class InvoiceFacade implements InvoiceFacadeInterface {
         this._findUsecase = usecaseProps.findUsecase;
     }
 
-    async generate(input: GenerateInvoiceFacadeInputDto): Promise<GenerateInvoiceFacadeOutputDto> {
+    async create(input: GenerateInvoiceFacadeInputDto): Promise<GenerateInvoiceFacadeOutputDto> {
         return await this._generateUsecase.execute(input);
     }
 
