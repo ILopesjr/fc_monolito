@@ -37,7 +37,13 @@ describe("ClientAdmFacade test", () => {
       id: "1",
       name: "Client 1",
       email: "x@x.com",
-      address: "Address 1",
+      document: "123456789",
+      street: "Street 1",
+      complement: "Complement 1",
+      number: "1",
+      city: "City 1",
+      state: "State 1",
+      zipCode: "12345678",
     };
 
     await facade.add(input);
@@ -47,7 +53,7 @@ describe("ClientAdmFacade test", () => {
     expect(client).toBeDefined();
     expect(client.name).toBe(input.name);
     expect(client.email).toBe(input.email);
-    expect(client.address).toBe(input.address);
+    expect(client.street).toBe(input.street);
   });
 
   it("should find a client", async () => {
@@ -65,7 +71,13 @@ describe("ClientAdmFacade test", () => {
       id: "1",
       name: "Client 1",
       email: "x@x.com",
-      address: "Address 1",
+      document: "123456789",
+      street: "Street 1",
+      complement: "Complement 1",
+      number: "1",
+      city: "City 1",
+      state: "State 1",
+      zipCode: "12345678",
     };
 
     await facade.add(input);
@@ -76,6 +88,6 @@ describe("ClientAdmFacade test", () => {
     expect(client.id).toBe(input.id);
     expect(client.name).toBe(input.name);
     expect(client.email).toBe(input.email);
-    expect(client.address).toBe(input.address);
+    expect(client.street).toBe(input.street);
   });
 });
