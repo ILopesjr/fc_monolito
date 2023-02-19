@@ -2,13 +2,10 @@ export interface AddClientInputDto {
   id?: string;
   name: string;
   email: string;
+  address: string;
   document: string;
-  street: string;
-  complement: string;
-  number: string;
-  city: string;
-  state: string;
-  zipCode: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface AddClientOutputDto {
@@ -16,12 +13,7 @@ export interface AddClientOutputDto {
   name: string;
   email: string;
   document: string;
-  street: string;
-  complement: string;
-  number: string;
-  city: string;
-  state: string;
-  zipCode: string;
+  address: string;
   createdAt: Date;
   updatedAt: Date;
 }

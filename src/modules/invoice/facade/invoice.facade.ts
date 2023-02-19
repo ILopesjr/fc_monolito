@@ -1,26 +1,35 @@
-import UseCaseInterface from "../../@shared/usecase/use-case.interface";
-import InvoiceFacadeInterface, { FindInvoiceFacadeInputDto, FindInvoiceFacadeOutputDto, GenerateInvoiceFacadeInputDto, GenerateInvoiceFacadeOutputDto } from "./invoice.facade.interface";
+import { UsecaseInterface } from "../../@shared/usecase/usecase.interface";
+import {
+  FindInvoiceFacadeInputDto,
+  FindInvoiceFacadeOutputDto,
+  GenerateInvoiceFacadeInputDto,
+  GenerateInvoiceFacadeOutputDto,
+  InvoiceFacadeInterface,
+} from "./invoice.facade.interface";
 
 export interface UseCaseProps {
-    generateUsecase: UseCaseInterface;
-    findUsecase: UseCaseInterface;
+  generateUseCase: UsecaseInterface;
+  findUseCase: UsecaseInterface;
 }
 
-export default class invoiceFacade implements InvoiceFacadeInterface {
-    private _generateUsecase: UseCaseInterface;
-    private _findUsecase: UseCaseInterface;
-  
-    constructor(usecaseProps: UseCaseProps) {
-        this._generateUsecase = usecaseProps.generateUsecase;
-        this._findUsecase = usecaseProps.findUsecase;
-    }
+export class InvoiceFacade implements InvoiceFacadeInterface {
+  private _generateUseCase: UsecaseInterface;
+  private _findUseCase: UsecaseInterface;
 
-    async create(input: GenerateInvoiceFacadeInputDto): Promise<GenerateInvoiceFacadeOutputDto> {
-        return await this._generateUsecase.execute(input);
-    }
+  constructor(useCasesProps: UseCaseProps) {
+    this._generateUseCase = useCasesProps.generateUseCase;
+    this._findUseCase = useCasesProps.findUseCase;
+  }
 
-    async find(input: FindInvoiceFacadeInputDto): Promise<FindInvoiceFacadeOutputDto> {
-        return await this._findUsecase.execute(input);
-    }
+  async generateInvoice(
+    input: GenerateInvoiceFacadeInputDto
+  ): Promise<GenerateInvoiceFacadeOutputDto> {
+    return await this._generateUseCase.execute(input);
+  }
 
+  async findInvoice(
+    input: FindInvoiceFacadeInputDto
+  ): Promise<FindInvoiceFacadeOutputDto> {
+    return await this._findUseCase.execute(input);
+  }
 }

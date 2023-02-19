@@ -1,10 +1,10 @@
 import { Sequelize } from "sequelize-typescript";
-import Id from "../../@shared/domain/value-object/id.value-object";
-import Product from "../domain/product.entity";
+import { Product } from "../domain/product.entity";
 import { ProductModel } from "./product.model";
-import ProductRepository from "./product.repository";
+import { Id } from "../../@shared/domain/value-object/id.value-object";
+import { ProductRepository } from "./product.repository";
 
-describe("ProductRepository test", () => {
+describe("Product Repository test", () => {
   let sequelize: Sequelize;
 
   beforeEach(async () => {
@@ -15,7 +15,7 @@ describe("ProductRepository test", () => {
       sync: { force: true },
     });
 
-    await sequelize.addModels([ProductModel]);
+    sequelize.addModels([ProductModel]);
     await sequelize.sync();
   });
 
@@ -28,43 +28,56 @@ describe("ProductRepository test", () => {
       id: new Id("1"),
       name: "Product 1",
       description: "Product 1 description",
-      purchasePrice: 100,
-      stock: 10,
+      purchasePrice: 10,
+      inventory: 10,
     };
+
     const product = new Product(productProps);
     const productRepository = new ProductRepository();
     await productRepository.add(product);
 
     const productDb = await ProductModel.findOne({
-      where: { id: productProps.id.id },
+      where: {
+        id: productProps.id.id,
+      },
     });
 
     expect(productProps.id.id).toEqual(productDb.id);
     expect(productProps.name).toEqual(productDb.name);
     expect(productProps.description).toEqual(productDb.description);
     expect(productProps.purchasePrice).toEqual(productDb.purchasePrice);
-    expect(productProps.stock).toEqual(productDb.stock);
+    expect(productProps.inventory).toEqual(productDb.inventory);
   });
 
   it("should find a product", async () => {
     const productRepository = new ProductRepository();
 
-    ProductModel.create({
-      id: "1",
+    const productProps = {
+      id: new Id("1"),
       name: "Product 1",
       description: "Product 1 description",
-      purchasePrice: 100,
-      stock: 10,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      purchasePrice: 10,
+      inventory: 10,
+    };
+
+    const product = new Product(productProps);
+
+    await ProductModel.create({
+      id: product.id.id,
+      name: product.name,
+      description: product.description,
+      purchasePrice: product.purchasePrice,
+      inventory: product.inventory,
+      createdAt: product.createdAt,
+      updatedAt: product.updatedAt,
     });
 
-    const product = await productRepository.find("1");
+    const productCreated = await productRepository.find("1");
 
-    expect(product.id.id).toEqual("1");
-    expect(product.name).toEqual("Product 1");
-    expect(product.description).toEqual("Product 1 description");
-    expect(product.purchasePrice).toEqual(100);
-    expect(product.stock).toEqual(10);
+    expect(productProps.id.id).toEqual(productCreated.id.id);
+    expect(productProps.name).toEqual(productCreated.name);
+    expect(productProps.description).toEqual(productCreated.description);
+    expect(productProps.purchasePrice).toEqual(productCreated.purchasePrice);
+    expect(productProps.inventory).toEqual(productCreated.inventory);
   });
 });

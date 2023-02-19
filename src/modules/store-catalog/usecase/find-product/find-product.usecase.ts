@@ -1,7 +1,8 @@
-import ProductGateway from "../../gateway/product.gateway";
+import { ProductGateway } from "../../gateway/product.gateway";
+import { UsecaseInterface } from "../../../@shared/usecase/usecase.interface";
 import { FindProductInputDto, FindProductOutputDto } from "./find-product.dto";
 
-export default class FindProductUseCase {
+export class FindProductUsecase implements UsecaseInterface {
   constructor(private readonly productRepository: ProductGateway) {}
 
   async execute(input: FindProductInputDto): Promise<FindProductOutputDto> {

@@ -8,10 +8,10 @@ export interface GenerateInvoiceFacadeInputDto {
   state: string;
   zipCode: string;
   items: {
-      id: string;
-      name: string;
-      price: number;
-  }[];    
+    id: string;
+    name: string;
+    salesPrice: number;
+  }[];
 }
 
 export interface GenerateInvoiceFacadeOutputDto {
@@ -25,14 +25,14 @@ export interface GenerateInvoiceFacadeOutputDto {
   state: string;
   zipCode: string;
   items: {
-      id: string;
-      name: string;
-      price: number;
-  }[]; 
-  total: number;   
+    id: string;
+    name: string;
+    price: number;
+  }[];
+  total: number;
 }
 
-export interface FindInvoiceFacadeInputDto{
+export interface FindInvoiceFacadeInputDto {
   id: string;
 }
 
@@ -41,23 +41,27 @@ export interface FindInvoiceFacadeOutputDto {
   name: string;
   document: string;
   address: {
-      street: string;
-      number: string;
-      complement: string;
-      city: string;
-      state: string;
-      zipCode: string;
+    street: string;
+    number: string;
+    complement: string;
+    city: string;
+    state: string;
+    zipCode: string;
   };
   items: {
-      id: string;
-      name: string;
-      price: number;
-  }[]; 
+    id: string;
+    name: string;
+    salesPrice: number;
+  }[];
   total: number;
-  createdAt: Date;   
+  createdAt: Date;
 }
 
-export default interface InvoiceFacadeInterface {
-  create(input: GenerateInvoiceFacadeInputDto): Promise<GenerateInvoiceFacadeOutputDto>;
-  find(input: FindInvoiceFacadeInputDto): Promise<FindInvoiceFacadeOutputDto>;
+export interface InvoiceFacadeInterface {
+  generateInvoice(
+    input: GenerateInvoiceFacadeInputDto
+  ): Promise<GenerateInvoiceFacadeOutputDto>;
+  findInvoice(
+    input: FindInvoiceFacadeInputDto
+  ): Promise<FindInvoiceFacadeOutputDto>;
 }

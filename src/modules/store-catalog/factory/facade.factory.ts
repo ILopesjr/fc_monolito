@@ -1,18 +1,21 @@
-import StoreCatalogFacade from "../facade/store-catalog.facade";
-import ProductRepository from "../repository/product.repository";
-import FindAllProductsUsecase from "../usecase/find-all-products/find-all-products.usecase";
-import FindProductUseCase from "../usecase/find-product/find-product.usecase";
+import { ProductRepository } from "../repository/product.repository";
+import { FindProductUsecase } from "../usecase/find-product/find-product.usecase";
+import { FindAllProductsUsecase } from "../usecase/find-all-products/find-all-products.usecase";
+import { StoreCatalogFacade } from "../facade/store-catalog.facade";
 
-export default class StoreCatalogFacadeFactory {
+export class StoreCatalogFacadeFactory {
   static create(): StoreCatalogFacade {
     const productRepository = new ProductRepository();
-    const findUseCase = new FindProductUseCase(productRepository);
-    const findAllUseCase = new FindAllProductsUsecase(productRepository);
+    const findProductUsecase = new FindProductUsecase(productRepository);
+    const findAllProductsUsecase = new FindAllProductsUsecase(
+      productRepository
+    );
 
     const facade = new StoreCatalogFacade({
-      findUseCase: findUseCase,
-      findAllUseCase: findAllUseCase,
+      findProductUsecase,
+      findAllProductsUsecase,
     });
+
     return facade;
   }
 }

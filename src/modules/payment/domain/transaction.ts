@@ -1,6 +1,6 @@
+import { Id } from "../../@shared/domain/value-object/id.value-object";
+import { BaseEntity } from "../../@shared/domain/entity/base.entity";
 import AggregateRoot from "../../@shared/domain/entity/aggregate-root.interface";
-import BaseEntity from "../../@shared/domain/entity/base.entity";
-import Id from "../../@shared/domain/value-object/id.value-object";
 
 type TransactionProps = {
   id?: Id;
@@ -11,20 +11,20 @@ type TransactionProps = {
   updatedAt?: Date;
 };
 
-export default class Transaction extends BaseEntity implements AggregateRoot {
+export class Transaction extends BaseEntity implements AggregateRoot {
   private _amount: number;
   private _orderId: string;
   private _status: string;
 
   constructor(props: TransactionProps) {
-    super(props.id);
+    super(props.id, props.createdAt, props.updatedAt);
     this._amount = props.amount;
     this._orderId = props.orderId;
     this._status = props.status || "pending";
     this.validate();
   }
 
-  validate(): void {
+  private validate(): void {
     if (this._amount <= 0) {
       throw new Error("Amount must be greater than 0");
     }
@@ -39,22 +39,22 @@ export default class Transaction extends BaseEntity implements AggregateRoot {
   }
 
   process(): void {
-    if (this._amount >= 100) {
+    if (this.amount >= 100) {
       this.approve();
     } else {
       this.decline();
     }
   }
 
-  get amount(): number {
+  get amount() {
     return this._amount;
   }
 
-  get orderId(): string {
+  get orderId() {
     return this._orderId;
   }
 
-  get status(): string {
+  get status() {
     return this._status;
   }
 }

@@ -1,8 +1,8 @@
-export interface FindInvoiceUseCaseInputDTO {
+export interface FindInvoiceInputDto {
   id: string;
 }
 
-export interface FindInvoiceUseCaseOutputDTO {
+export interface FindInvoiceOutputDto {
   id: string;
   name: string;
   document: string;
@@ -17,7 +17,7 @@ export interface FindInvoiceUseCaseOutputDTO {
   items: {
     id: string;
     name: string;
-    price: number;
+    salesPrice: number;
   }[];
   total: number;
   createdAt: Date;

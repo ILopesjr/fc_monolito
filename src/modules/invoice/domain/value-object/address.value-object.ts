@@ -1,4 +1,4 @@
-import ValueObject from "../../@shared/domain/value-object/value-object.interface";
+import { ValueObject } from "../../../@shared/domain/value-object/value-object.interface";
 
 type AddressProps = {
   street: string;
@@ -9,10 +9,10 @@ type AddressProps = {
   zipCode: string;
 };
 
-export default class Address implements ValueObject {
+export class Address implements ValueObject {
   private _street: string;
   private _number: string;
-  private _complement?: string;
+  private _complement: string;
   private _city: string;
   private _state: string;
   private _zipCode: string;
@@ -34,7 +34,7 @@ export default class Address implements ValueObject {
     return this._number;
   }
 
-  get complement(): string | undefined {
+  get complement(): string {
     return this._complement;
   }
 

@@ -1,4 +1,4 @@
-import AddClientUseCase from "./add-client.usecase";
+import { AddClientUsecase } from "./add-client.usecase";
 
 const MockRepository = () => {
   return {
@@ -10,18 +10,13 @@ const MockRepository = () => {
 describe("Add Client Usecase unit test", () => {
   it("should add a client", async () => {
     const repository = MockRepository();
-    const usecase = new AddClientUseCase(repository);
+    const usecase = new AddClientUsecase(repository);
 
     const input = {
-      name: "Client 1",
-      email: "x@x.com",
+      name: "John Doe",
+      email: "email@gmail.com",
+      address: "1234 Street",
       document: "123456789",
-      street: "Street 1",
-      complement: "Complement 1",
-      number: "1",
-      city: "City 1",
-      state: "State 1",
-      zipCode: "12345678",
     };
 
     const result = await usecase.execute(input);
@@ -30,6 +25,6 @@ describe("Add Client Usecase unit test", () => {
     expect(result.id).toBeDefined();
     expect(result.name).toEqual(input.name);
     expect(result.email).toEqual(input.email);
-    expect(result.street).toEqual(input.street);
+    expect(result.address).toEqual(input.address);
   });
 });

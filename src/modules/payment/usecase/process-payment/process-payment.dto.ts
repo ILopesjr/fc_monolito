@@ -6,8 +6,8 @@ export interface ProcessPaymentInputDto {
 export interface ProcessPaymentOutputDto {
   transactionId: string;
   orderId: string;
-  amount: number;
   status: string;
+  amount: number;
   createdAt: Date;
   updatedAt: Date;
 }

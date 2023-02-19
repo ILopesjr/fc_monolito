@@ -1,10 +1,9 @@
 import { Sequelize } from "sequelize-typescript";
-import Id from "../../@shared/domain/value-object/id.value-object";
-import Transaction from "../domain/transaction";
-import TransactionModel from "./transaction.model";
-import TransactionRepostiory from "./transaction.repository";
-
-describe("TransactionRepository test", () => {
+import { TransactionModel } from "./transaction.model";
+import { Transaction } from "../domain/transaction";
+import { Id } from "../../@shared/domain/value-object/id.value-object";
+import { TransactionRepository } from "./transaction.repository";
+describe("Transaction Repository test", () => {
   let sequelize: Sequelize;
 
   beforeEach(async () => {
@@ -15,7 +14,7 @@ describe("TransactionRepository test", () => {
       sync: { force: true },
     });
 
-    await sequelize.addModels([TransactionModel]);
+    sequelize.addModels([TransactionModel]);
     await sequelize.sync();
   });
 
@@ -29,14 +28,21 @@ describe("TransactionRepository test", () => {
       amount: 100,
       orderId: "1",
     });
+
     transaction.approve();
 
-    const repository = new TransactionRepostiory();
-    const result = await repository.save(transaction);
+    const repository = new TransactionRepository();
 
-    expect(result.id.id).toBe(transaction.id.id);
-    expect(result.status).toBe("approved");
-    expect(result.amount).toBe(transaction.amount);
-    expect(result.orderId).toBe(transaction.orderId);
+    await repository.save(transaction);
+
+    const transactionModel = await TransactionModel.findOne({
+      where: { id: "1" },
+    });
+
+    expect(transactionModel).toBeDefined();
+    expect(transactionModel?.id).toBe("1");
+    expect(transactionModel?.orderId).toBe("1");
+    expect(transactionModel?.amount).toBe(100);
+    expect(transactionModel?.status).toBe("approved");
   });
 });

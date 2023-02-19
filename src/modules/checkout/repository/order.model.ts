@@ -5,9 +5,9 @@ import {
   PrimaryKey,
   Table,
 } from "sequelize-typescript";
-import Client from "../domain/client.entity";
-import Product from "../domain/product.entity";
 
+import { Client } from "../domain/client.entity";
+import { Product } from "../domain/product.entity";
 
 @Table({
   tableName: "orders",

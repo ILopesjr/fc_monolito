@@ -1,8 +1,8 @@
 export interface FindAllProductsDto {
-  products: {
+  products: Array<{
     id: string;
     name: string;
     description: string;
     salesPrice: number;
-  }[];
+  }>;
 }

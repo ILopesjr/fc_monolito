@@ -1,13 +1,13 @@
-import Id from "../../../@shared/domain/value-object/id.value-object";
-import Product from "../../domain/product.entity";
-import ProductGateway from "../../gateway/product.gateway";
+import { Id } from "../../../@shared/domain/value-object/id.value-object";
+import { Product } from "../../domain/product.entity";
 import { AddProductInputDto, AddProductOutputDto } from "./add-product.dto";
+import { ProductGateway } from "../../gateway/product.gateway";
 
-export default class AddProductUseCase {
+export class AddProductUsecase {
   private _productRepository: ProductGateway;
 
-  constructor(_productRepository: ProductGateway) {
-    this._productRepository = _productRepository;
+  constructor(productRepository: ProductGateway) {
+    this._productRepository = productRepository;
   }
 
   async execute(input: AddProductInputDto): Promise<AddProductOutputDto> {
@@ -16,10 +16,11 @@ export default class AddProductUseCase {
       name: input.name,
       description: input.description,
       purchasePrice: input.purchasePrice,
-      stock: input.stock,
+      inventory: input.inventory,
     };
 
     const product = new Product(props);
+
     this._productRepository.add(product);
 
     return {
@@ -27,7 +28,7 @@ export default class AddProductUseCase {
       name: product.name,
       description: product.description,
       purchasePrice: product.purchasePrice,
-      stock: product.stock,
+      inventory: product.inventory,
       createdAt: product.createdAt,
       updatedAt: product.updatedAt,
     };

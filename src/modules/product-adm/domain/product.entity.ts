@@ -1,29 +1,27 @@
-import BaseEntity from "../../@shared/domain/entity/base.entity";
+import { BaseEntity } from "../../@shared/domain/entity/base.entity";
 import AggregateRoot from "../../@shared/domain/entity/aggregate-root.interface";
-import Id from "../../@shared/domain/value-object/id.value-object";
+import { Id } from "../../@shared/domain/value-object/id.value-object";
 
 type ProductProps = {
   id?: Id;
   name: string;
   description: string;
   purchasePrice: number;
-  stock: number;
-  createdAt?: Date;
-  updatedAt?: Date;
+  inventory: number;
 };
 
-export default class Product extends BaseEntity implements AggregateRoot {
+export class Product extends BaseEntity implements AggregateRoot {
   private _name: string;
   private _description: string;
   private _purchasePrice: number;
-  private _stock: number;
+  private _inventory: number;
 
   constructor(props: ProductProps) {
     super(props.id);
     this._name = props.name;
     this._description = props.description;
     this._purchasePrice = props.purchasePrice;
-    this._stock = props.stock;
+    this._inventory = props.inventory;
   }
 
   get name(): string {
@@ -38,23 +36,27 @@ export default class Product extends BaseEntity implements AggregateRoot {
     return this._purchasePrice;
   }
 
-  get stock(): number {
-    return this._stock;
+  get inventory(): number {
+    return this._inventory;
   }
 
-  set name(name: string) {
+  public updateName(name: string): void {
     this._name = name;
   }
 
-  set stock(stock: number) {
-    this._stock = stock;
-  }
-
-  set description(description: string) {
+  public updateDescription(description: string): void {
     this._description = description;
   }
 
-  set purchasePrice(purchasePrice: number) {
+  public updatePurchasePrice(purchasePrice: number): void {
     this._purchasePrice = purchasePrice;
+  }
+
+  public increaseInventory(inventory: number): void {
+    this._inventory += inventory;
+  }
+
+  public decreaseInventory(inventory: number): void {
+    this._inventory -= inventory;
   }
 }

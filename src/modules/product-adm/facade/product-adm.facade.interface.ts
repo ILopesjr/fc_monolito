@@ -3,21 +3,21 @@ export interface AddProductFacadeInputDto {
   name: string;
   description: string;
   purchasePrice: number;
-  stock: number;
+  inventory: number;
 }
 
-export interface CheckStockFacadeInputDto {
+export interface CheckInventoryFacadeInputDto {
   productId: string;
 }
 
-export interface CheckStockFacadeOutputDto {
+export interface CheckInventoryFacadeOutputDto {
   productId: string;
-  stock: number;
+  inventory: number;
 }
 
-export default interface ProductAdmFacadeInterface {
+export interface ProductAdmFacadeInterface {
   addProduct(input: AddProductFacadeInputDto): Promise<void>;
-  checkStock(
-    input: CheckStockFacadeInputDto
-  ): Promise<CheckStockFacadeOutputDto>;
+  checkInventory(
+    input: CheckInventoryFacadeInputDto
+  ): Promise<CheckInventoryFacadeOutputDto>;
 }

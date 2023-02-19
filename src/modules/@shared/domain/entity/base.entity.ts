@@ -1,7 +1,7 @@
-import Id from "../value-object/id.value-object";
+import { Id } from "../value-object/id.value-object";
 
-export default class BaseEntity {
-  private _id: Id;
+export class BaseEntity {
+  private readonly _id: Id;
   private _createdAt: Date;
   private _updatedAt: Date;
 
@@ -23,7 +23,10 @@ export default class BaseEntity {
     return this._updatedAt;
   }
 
-  set updatedAt(updatedAt: Date) {
-    this._updatedAt = updatedAt;
+  set updatedAt(value: Date) {
+    this._updatedAt = value;
+  }
+  set createdAt(value: Date) {
+    this._createdAt = value;
   }
 }
